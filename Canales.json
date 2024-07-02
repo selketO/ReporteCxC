@@ -1,0 +1,35 @@
+{
+  "Canales": {
+    "Autoservicios": [
+      {"Cliente": "Nueva Wal mart de Mexico", "Dias de credito": 60},
+      {"Cliente": "Tiendas Chedraui", "Dias de credito": 90},
+      {"Cliente": "Tiendas Soriana", "Dias de credito": 30},
+      {"Cliente": "Supermercados Internacionales H E B", "Dias de credito": 60}
+    ],
+    "Distribuidores": [
+      {"Cliente": "Nadro", "Dias de credito": 75},
+      {"Cliente": "Juan Fernando Zepeda Delgadillo", "Dias de credito": 30},
+      {"Cliente": "Farmacos Nacionales", "Dias de credito": 75},
+      {"Cliente": "Brudifarma", "Dias de credito": 45},
+      {"Cliente": "Peninsula7", "Dias de credito": 60},
+      {"Cliente": "PENINSULA7", "Dias de credito": 60},
+      {"Cliente": "Distribuidora Dekafarma", "Dias de credito": 30},
+      {"Cliente": "Imab del Caribe", "Dias de credito": 35},
+      {"Cliente": "Distribuidora y representaciones del Noroeste", "Dias de credito": 45}
+    ],
+    "Farmacias": [
+      {"Cliente": "Farmacias De Similares", "Dias de credito": 45},
+      {"Cliente": "FARMACIAS DE SIMILARES", "Dias de credito": 45},
+      {"Cliente": "Farmacia Guadalajara", "Dias de credito": 90},
+      {"Cliente": "FARMACIA GUADALAJARA", "Dias de credito": 90},
+      {"Cliente": "Farmacon", "Dias de credito": 75},
+      {"Cliente": "Rama Farmaceutica", "Dias de credito": 60}
+    ],
+    "Especializados": [
+      {"Cliente": "Grupo Hermanos Sanborns", "Dias de credito": 60},
+      {"Cliente": "SANBORN HERMANOS", "Dias de credito": 60},
+      {"Cliente": "Super Kiosko", "Dias de credito": 45},
+      {"Cliente": "Lubricantes Francomexicanos", "Dias de credito": 30}
+    ]
+  }
+}

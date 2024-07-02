@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../public/css/index.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2/dist/js/select2.full.min.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/public/img/BCL MGM.png" alt="" width="300" height="70px" class="d-inline-block align-text-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+              <h3>Reporte de cuentas por Cobrar</h3>
+            </a>
+          </li>
+        </ul>
+        <div class="navbar-text">
+          Actualizado al <strong>
+            <p id="fechaFormateada"></p>
+          </strong> <br>
+          Reporte expresado en <strong>Pesos Mexicanos</strong>
+        </div>
+        <a href="#" onclick="navigateToReport()" class="cssbuttons-io-button" role="button">Reporte<i class="fa-solid fa-file-chart-pie"></i></a>
+        <a onclick="window.history.back();" class="cssbuttons-io-button" role="button">Home<i class="fa-solid fa-file-chart-pie"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="dashboard">
+      <div class="side">
+        <div class="sidebar">
+          <div class="sidebar-header">
+            <h5>Filtros</h5>
+          </div>
+          <div class="sidebar-body">
+            <div class="form-group">
+              <label>Fecha de Cierre</label>
+              <input type="date" class="form-control" id="datePicker">
+            </div>
+            <div class="form-group">
+              <label class="custom-checkbox">
+                  <input type="checkbox" id="allChannels" name="channels" onchange="updateDashboard()">
+                  <i class="far fa-square"></i> Ver todos los Canales
+              </label>
+              <div class="cuadrado_que_tiene_dentro_ventas">
+              <div class="linea-gris">
+                <span class="linea-gris"></span>
+              </div>
+              <div class="checkboxes">
+              <label class="custom-checkbox">
+                  <input type="checkbox" id="Autoservicios" name="channels" onchange="updateDashboard()">
+                  <i class="far fa-square"></i> Autoservicios
+              </label>
+              <label class="custom-checkbox">
+                  <input type="checkbox" id="Distribuidores" name="channels" onchange="updateDashboard()">
+                  <i class="far fa-square"></i> Distribuidores
+              </label>
+              <label class="custom-checkbox">
+                  <input type="checkbox" id="Farmacias" name="channels" onchange="updateDashboard()">
+                  <i class="far fa-square"></i> Farmacias
+              </label>
+              <label class="custom-checkbox">
+                  <input type="checkbox" id="Especializados" name="channels" onchange="updateDashboard()">
+                  <i class="far fa-square"></i> Especializados
+              </label>
+          </div>
+        </div>
+        </div>
+            
+            
+            <div id="kams" class="form-group">
+              <label for="kamSelector">Seleccionar KAM:</label>
+              <select id="kamSelector" class="form-control" onchange="updateReport()">
+                <option value="">Todos los KAMs</option>
+                <% uniqueKams.forEach(kam=> {
+                  if (!['Mayra Acevedo', 'Pedro Alberto Mora Cabrera', 'Zaira García'].includes(kam)) { %>
+                  <option value="<%= kam %>">
+                    <%= kam %>
+                  </option>
+                  <% }}); %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="clientSelector">Seleccionar Cliente:</label>
+              <select id="clientSelector" class="form-control">
+                <option value="">Todos los Clientes</option>
+                <% uniqueClients.forEach(client => { %>
+                  <option value="<%= client %>"><%= client %></option>
+                <% }); %>
+              </select>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="contenido">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <div id="totalCarteraBox">
+                <div class="porcentajes">
+                  <p>Total Cartera Clientes </p> <span class="porcentajes_totales"><strong>100%</strong></span>
+                </div>
+                <h2>
+                  <%= totalCartera.toLocaleString('es-MX', { style: 'currency' , currency: 'MXN' }) %>
+                </h2>
+              </div>
+            </div>
+            <div class="col">
+              <div id="aTiempoBox">
+                <div class="porcentajes">
+                  <p>En Tiempo </p> <span class="porcentajes_totales"><strong>
+                      <%= ((totalATiempo / totalCartera) * 100).toFixed(2) %>%
+                    </strong></span>
+                </div>
+                <h2>
+                  <%= totalATiempo.toLocaleString('es-MX', { style: 'currency' , currency: 'MXN' }) %>
+                </h2>
+              </div>
+            </div>
+            <div class="col">
+              <div id="vencidoBox">
+                <div class="porcentajes">
+                  <p>Vencido </p><span class="porcentajes_totales"><strong>
+                      <%= ((totalVencido / totalCartera) * 100).toFixed(2) %>%
+                    </strong></span>
+                </div>
+                <h2>
+                  <%= totalVencido.toLocaleString('es-MX', { style: 'currency' , currency: 'MXN' }) %>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <div class="col">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="titulo b" colspan="3">Cuentas por Cobrar Vencidas <br>(Rango de días)</th>
+                    </tr>
+                    <tr>
+                      <th scope="col">Días</th>
+                      <th scope="col">Monto ($)</th>
+                      <th scope="col">%</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for (const [range, amount] of Object.entries(sumsByRange)) { %>
+                      <tr>
+                        <td scope="row">
+                          <%= range %>
+                        </td>
+                        <td scope="row">
+                          <%= amount.toLocaleString('es-MX', { style: 'currency' , currency: 'MXN' }) %>
+                        </td>
+                        <td scope="row">
+                          <%= percentagesByRange[range] %>%
+                        </td>
+                      </tr>
+                      <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col">
+              <div>
+                <figure class="highcharts-figure">
+                  <h1 class="titulo">Cuentas por Cobrar</h1>
+                  <div id="container" style="width:100%; height:300px;"></div>
+                </figure>
+              </div>
+            </div>
+            <div class="col">
+              <div>
+                <figure class="highcharts-figure">
+                  <h1 class="titulo">Cartera Vencida
+                    (Rango de Días)</h1>
+                  <div id="rangePieChart" style="width:100%; height:300px;"></div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+              <figure class="highcharts-figure">
+                <h1 class="titulo">Historico de cartera de clientes</h1>
+                <div id="monthlyChart" style="width:100%; height:400px;"></div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    var totalVencido = <%= totalVencido %>;
+    var totalATiempo = <%= totalATiempo %>;
+    var sumsByRange = <%- JSON.stringify(sumsByRange) %>;
+    var percentagesByRange = <%- JSON.stringify(percentagesByRange) %>;
+    var pieData = Object.keys(sumsByRange).map(key => ({
+        name: key + ' días',
+        y: parseFloat(sumsByRange[key]),
+        percentage: parseFloat(percentagesByRange[key])
+    }));
+    var monthlyData = <%- JSON.stringify(monthlyData) %>;
+
+    window.onload = function() {
+          var fecha = new Date(); // Fecha actual
+          var dia = fecha.getDate(); // Obteniendo día
+          var mes = fecha.toLocaleString('es-ES', { month: 'long' }); // Obteniendo mes en formato largo
+          var ano = fecha.getFullYear(); // Obteniendo año
+
+          document.getElementById('fechaFormateada').textContent = dia + " de " + mes + " del " + ano;
+      };
+      function navigateToReport() {
+    const token = sessionStorage.getItem("authToken");
+    if (token) {
+        window.location.href = `/reporte?token=${token}`;
+    } else {
+        redirectToLogin();
+    }
+}
+</script>
+
+  <script src="/public/js/index.js"></script>
+  <script src="/public/js/inicio.js"></script>
+
+</body>
+
+</html>

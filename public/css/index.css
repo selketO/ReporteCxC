@@ -1,0 +1,264 @@
+.highcharts-figure, .highcharts-data-table table {
+  min-width: 320px;
+  margin: 1em auto;
+  box-shadow:  4px 5px 5px 0px #00000024;
+  border-radius: 15px;
+}
+ 
+.highcharts-data-table table {
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #ebebeb;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+ 
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+ 
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+ 
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+ 
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+ 
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+ 
+table{
+  border: none;
+  text-align: center;
+  height: 300px;
+  margin-top: 15px;
+  box-shadow: 4px 5px 5px 0px #00000024;
+  border-radius: 15px;
+}
+#totalCarteraBox{
+background-color: #00205B;
+}
+#vencidoBox{
+  background-color: #D53302;
+}
+#aTiempoBox{
+  background-color: #0C9600;
+}
+#totalCarteraBox, #vencidoBox ,#aTiempoBox{
+  box-shadow: 4px 5px 5px 0px #00000024;
+  color: white;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+}
+#rangePieChart, #container, #monthlyChart{
+      padding: 25px;
+      border-radius: 15px;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 0.5rem !important;
+}
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 4px 5px 5px 0px #00000024;
+}
+#fechaFormateada {
+  display: contents;
+}
+.porcentajes {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.porcentajes_totales{
+  font-size: 23px;
+    transform: translateY(-20px);
+}
+.navbar-text
+{
+  text-align: end;
+  color: black;
+}
+.sidebar {
+  box-shadow: 4px 5px 5px 0px #00000024;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #f8f9fa;
+  transition: transform 0.3s ease-in-out;
+}
+ 
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 15px;
+  font-family: Arial, sans-serif;
+}
+ 
+.sidebar-header h5 {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 16px;
+}
+ 
+.sidebar-body .form-group {
+  margin-bottom: 20px;
+}
+ 
+.sidebar-body h6 {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+ 
+.form-group div {
+  margin-left: 3.5px !important;
+  margin: 5px 0;
+  font-size: 13px;
+  color: #666;
+}
+ 
+.form-group input[type="checkbox"] {
+  margin-right: 5px;
+ 
+}
+ 
+.form-control {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+ 
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.client-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.dashboard{
+  display: flex;
+}
+.contenido {
+  width: 100%;
+}
+ 
+.titulo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  justify-content: center;
+  text-align: center;
+}
+ 
+ .col {
+  width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+ 
+.titulo.b {
+  padding-bottom: 30px;
+  padding-top: 0px;
+}
+ 
+.cambiar-color {
+  background-color: gray;
+  color: white;
+}
+ 
+.form-group .custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+ 
+.form-group .custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+ 
+.form-group .custom-checkbox i {
+  font-size: 20px;
+  margin-right: 5px;
+  color: black;
+}
+ 
+.form-group .custom-checkbox input[type="checkbox"]:checked + i {
+  color: black;
+  background-color: black;
+  border-radius: 3px; /* Opcional: añade bordes redondeados */
+}
+ 
+.linea-gris, span.linea-gris {
+  background-color: #D9D9D9;
+  border: #D9D9D9 solid 1px;
+}
+ 
+.cuadrado_que_tiene_dentro_ventas {
+  display: flex;
+  margin-left: 0px;
+}
+ 
+.checkboxes {
+  padding-left: 20px;
+}
+ 
+#bold {
+  font-weight: bold;
+  color: blueviolet;
+}
+ 
+.cssbuttons-io-button {
+  margin-left: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #00205B;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+ 
+.cssbuttons-io-button:hover {
+  background-color: #00205B;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  color: white;
+}
