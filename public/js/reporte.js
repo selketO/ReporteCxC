@@ -46,6 +46,7 @@ function handleRowClick(event) {
     this.setAttribute('aria-expanded', 'false');
     this.classList.add('collapsed');
   }
+ 
 }
 function updateReport() {
   const selectedKam = document.getElementById('kamSelector').value;
