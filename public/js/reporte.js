@@ -40,8 +40,32 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('kamSelector').addEventListener('change', updateReport);
   document.getElementById('clientSelector').addEventListener('change', updateReport);
   document.getElementById('fechaCierre').addEventListener('change', updateReport);
+  reattachClickHandlers();
 });
-
+function reattachClickHandlers() {
+  document.querySelectorAll('.clickable-row').forEach(row => {
+    row.addEventListener('click', function(event) {
+      event.preventDefault();
+      const targetId = this.getAttribute('data-bs-target').substring(1);
+      const detailsRow = document.getElementById(targetId);
+      const tds = this.querySelectorAll('td');
+ 
+      if (detailsRow.style.display === 'none' || detailsRow.style.display === '') {
+        detailsRow.style.display = 'table-row';
+        detailsRow.classList.add('show');
+        tds.forEach(td => td.classList.add('bg-grey'));
+        this.setAttribute('aria-expanded', 'true');
+        this.classList.remove('collapsed');
+      } else {
+        detailsRow.style.display = 'none';
+        detailsRow.classList.remove('show');
+        tds.forEach(td => td.classList.remove('bg-grey'));
+        this.setAttribute('aria-expanded', 'false');
+        this.classList.add('collapsed');
+      }
+    });
+  });
+}
 function updateReport() {
   const selectedKam = document.getElementById('kamSelector').value;
   const selectedClient = document.getElementById('clientSelector').value;
@@ -83,7 +107,6 @@ function updateMainTable(groupedRecords) {
 }
 
 function generateRowHtml(cliente, index) {
-  // Generar el HTML para cada fila y sus detalles desplegables
   return `
     <tr class="clickable-row collapsed" data-bs-toggle="collapse" data-bs-target="#details-${index}" aria-expanded="false" aria-controls="details-${index}">
       <td><span class="collapse-indicator"></span>${cliente.cliente}</td>
