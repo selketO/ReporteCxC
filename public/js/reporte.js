@@ -1,47 +1,52 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const clickableRows = document.querySelectorAll('.clickable-row');
   const allChannelsCheckbox = document.getElementById('allChannels');
   const channelCheckboxes = document.querySelectorAll('input[name="channels"]');
-
-  clickableRows.forEach(row => {
-    row.addEventListener('click', function(event) {
-      event.preventDefault();
-      const targetId = this.getAttribute('data-bs-target').substring(1);
-      const detailsRow = document.getElementById(targetId);
-      const tds = this.querySelectorAll('td');
  
-      if (detailsRow.style.display === 'none' || detailsRow.style.display === '') {
-        detailsRow.style.display = 'table-row';
-        detailsRow.classList.add('show'); // Añade la clase show para las transiciones CSS
-        tds.forEach(td => td.classList.add('bg-grey')); // Añade la clase bg-grey a todos los td
-        this.setAttribute('aria-expanded', 'true');
-        this.classList.remove('collapsed'); // Remover la clase 'collapsed' para indicar que la fila está expandida
-      } else {
-        detailsRow.style.display = 'none';
-        detailsRow.classList.remove('show'); // Remueve la clase show para las transiciones CSS
-        tds.forEach(td => td.classList.remove('bg-grey')); // Remueve la clase bg-grey de todos los td
-        this.setAttribute('aria-expanded', 'false');
-        this.classList.add('collapsed'); // Añadir la clase 'collapsed' para indicar que la fila está colapsada
-      }
-    });
-  });
-
   allChannelsCheckbox.addEventListener('change', function() {
     channelCheckboxes.forEach(checkbox => {
       checkbox.checked = this.checked;
     });
     updateReport();
   });
-
+ 
   channelCheckboxes.forEach(checkbox => {
     checkbox.addEventListener('change', updateReport);
   });
-
+ 
   document.getElementById('kamSelector').addEventListener('change', updateReport);
   document.getElementById('clientSelector').addEventListener('change', updateReport);
   document.getElementById('fechaCierre').addEventListener('change', updateReport);
+ 
+  attachClickHandlers();
 });
-
+ 
+function attachClickHandlers() {
+  document.querySelectorAll('.clickable-row').forEach(row => {
+    row.removeEventListener('click', handleRowClick);
+    row.addEventListener('click', handleRowClick);
+  });
+}
+ 
+function handleRowClick(event) {
+  event.preventDefault();
+  const targetId = this.getAttribute('data-bs-target').substring(1);
+  const detailsRow = document.getElementById(targetId);
+  const tds = this.querySelectorAll('td');
+ 
+  if (detailsRow.style.display === 'none' || detailsRow.style.display === '') {
+    detailsRow.style.display = 'table-row';
+    detailsRow.classList.add('show');
+    tds.forEach(td => td.classList.add('bg-grey'));
+    this.setAttribute('aria-expanded', 'true');
+    this.classList.remove('collapsed');
+  } else {
+    detailsRow.style.display = 'none';
+    detailsRow.classList.remove('show');
+    tds.forEach(td => td.classList.remove('bg-grey'));
+    this.setAttribute('aria-expanded', 'false');
+    this.classList.add('collapsed');
+  }
+}
 function updateReport() {
   const selectedKam = document.getElementById('kamSelector').value;
   const selectedClient = document.getElementById('clientSelector').value;
@@ -49,19 +54,19 @@ function updateReport() {
   const selectedChannels = Array.from(document.querySelectorAll('input[name="channels"]:checked'))
                                 .map(input => input.id)
                                 .filter(id => id !== 'allChannels');
-
+ 
   const queryString = `kam=${encodeURIComponent(selectedKam)}&client=${encodeURIComponent(selectedClient)}&date=${encodeURIComponent(selectedDate)}&channels=${encodeURIComponent(selectedChannels.join(','))}`;
-
+ 
   fetch(`/api/dashboard-datas?${queryString}`)
     .then(response => response.json())
     .then(data => {
       document.querySelector('#totalCarteraBox h2').textContent = formatCurrency(data.totalCartera);
       document.querySelector('#aTiempoBox h2').textContent = data.rotacionCartera;
       document.querySelector('#vencidoBox h2').textContent = '60';
-      
+     
       // Update totalAmountSigned
       document.querySelector('#totalCarteraBox h2').textContent = formatCurrency(data.totalAmountSigned);
-
+ 
       updateMainTable(data.groupedRecords);
     })
     .catch(error => console.error('Error al cargar los datos:', error));
@@ -69,21 +74,21 @@ function updateReport() {
 function formatCurrency(amount) {
   return amount.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
 }
-
+ 
 function updateMainTable(groupedRecords) {
   const tbody = document.getElementById('mainTableBody');
   tbody.innerHTML = ''; // Clear the existing table content
-
+ 
   groupedRecords.forEach((cliente, index) => {
     const row = generateRowHtml(cliente, index);
     tbody.innerHTML += row;
   });
-
-  reattachClickHandlers(); // Re-attach event handlers for expandable rows
+ 
+  attachClickHandlers(); // Re-attach event handlers for expandable rows
 }
-
+ 
+ 
 function generateRowHtml(cliente, index) {
-  // Generar el HTML para cada fila y sus detalles desplegables
   return `
     <tr class="clickable-row collapsed" data-bs-toggle="collapse" data-bs-target="#details-${index}" aria-expanded="false" aria-controls="details-${index}">
       <td><span class="collapse-indicator"></span>${cliente.cliente}</td>
@@ -131,8 +136,8 @@ function generateRowHtml(cliente, index) {
     </tr>
   `;
 }
-
-
+ 
+ 
 function reattachClickHandlers() {
   // Vincular nuevamente los controladores de eventos a las filas que pueden expandirse/cerrarse
   document.querySelectorAll('.clickable-row').forEach(row => {
@@ -143,7 +148,7 @@ function reattachClickHandlers() {
     });
   });
 }
-
+ 
 function toggleRow(detailsRow, triggerRow) {
   // Alternar la visibilidad de la fila de detalles
   const isVisible = detailsRow.style.display === 'table-row';
@@ -151,3 +156,12 @@ function toggleRow(detailsRow, triggerRow) {
   triggerRow.setAttribute('aria-expanded', !isVisible);
   triggerRow.classList.toggle('collapsed', isVisible);
 }
+
+window.onload = function() {
+  var fecha = new Date(); // Fecha actual
+  var dia = fecha.getDate(); // Obteniendo día
+  var mes = fecha.toLocaleString('es-ES', { month: 'long' }); // Obteniendo mes en formato largo
+  var ano = fecha.getFullYear(); // Obteniendo año
+
+  document.getElementById('fechaFormateada').textContent = dia + " de " + mes + " del " + ano;
+};

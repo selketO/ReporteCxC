@@ -262,3 +262,17 @@ p {
   transform: translateY(-2px);
   color: white;
 }
+
+
+@media (min-width: 1200px) {
+  .h3, h3 {
+      font-size: 1.3rem !important;
+  }
+  .imagen {
+      width: 250px !important;
+      height: 60px !important;
+  }
+  .pesos {
+    font-size: .85rem
+  }
+}

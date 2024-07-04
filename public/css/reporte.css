@@ -137,12 +137,13 @@
     font-weight: bold;
   }
  
-  .form-group div {
-    margin-left: 14px !important;
-    margin: 5px 0;
-    font-size: 13px;
-    color: #666;
-  }
+  
+.form-group div {
+  margin-left: 3.5px !important;
+  margin: 5px 0;
+  font-size: 13px;
+  color: #666;
+}
  
   .form-group input[type="checkbox"] {
     margin-right: 5px;
@@ -285,3 +286,35 @@
     background-color: black;
     border-radius: 3px; /* Opcional: añade bordes redondeados */
   }
+   
+  .linea-gris, span.linea-gris {
+    background-color: #D9D9D9;
+    border: #D9D9D9 solid 1px;
+  }
+   
+  .cuadrado_que_tiene_dentro_ventas {
+    display: flex;
+    margin-left: 0px;
+  }
+   
+  .checkboxes {
+    padding-left: 20px;
+  }
+
+  @media (min-width: 1200px) {
+    .h3, h3 {
+        font-size: 1.3rem !important;
+    }
+    .imagen {
+        width: 250px !important;
+        height: 60px !important;
+    }
+    .pesos {
+      font-size: .85rem
+    
+
+    }
+  }
+
+  
+  

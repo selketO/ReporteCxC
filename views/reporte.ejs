@@ -24,7 +24,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
-        <img src="/public/img/BCL MGM.png" alt="" width="300" height="70px" class="d-inline-block align-text-top">
+        <img src="/public/img/BCL MGM.png" alt="" width="300" height="70px" class="d-inline-block align-text-top imagen">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
             </a>
           </li>
         </ul>
-        <div class="navbar-text">
+        <div class="navbar-text pesos">
           Actualizado al <strong>
             <p id="fechaFormateada"></p>
           </strong> <br>
@@ -62,13 +62,36 @@
             <label>Fecha de Cierre</label>
             <input type="date" id="fechaCierre" class="form-control" onchange="updateReport()">
           </div>
-            <div class="form-group">
-              <label><input type="checkbox" id="allChannels" name="channels" onchange="updateReport()"> Ver todos los Canales</label>
-              <div><input type="checkbox" id="Autoservicios" name="channels" onchange="updateReport()"> Autoservicios</div>
-              <div><input type="checkbox" id="Distribuidores" name="channels" onchange="updateReport()"> Distribuidores</div>
-              <div><input type="checkbox" id="Farmacias" name="channels" onchange="updateReport()"> Farmacias</div>
-              <div><input type="checkbox" id="Especializados" name="channels" onchange="updateReport()"> Especializados</div>
+          <div class="form-group">
+            <label class="custom-checkbox">
+                <input type="checkbox" id="allChannels" name="channels" onchange="updateDashboard()">
+                <i class="far fa-square"></i> Ver todos los Canales
+            </label>
+            <div class="cuadrado_que_tiene_dentro_ventas">
+            <div class="linea-gris">
+              <span class="linea-gris"></span>
             </div>
+            <div class="checkboxes">
+            <label class="custom-checkbox">
+                <input type="checkbox" id="Autoservicios" name="channels" onchange="updateDashboard()">
+                <i class="far fa-square"></i> Autoservicios
+            </label>
+            <label class="custom-checkbox">
+                <input type="checkbox" id="Distribuidores" name="channels" onchange="updateDashboard()">
+                <i class="far fa-square"></i> Distribuidores
+            </label>
+            <label class="custom-checkbox">
+                <input type="checkbox" id="Farmacias" name="channels" onchange="updateDashboard()">
+                <i class="far fa-square"></i> Farmacias
+            </label>
+            <label class="custom-checkbox">
+                <input type="checkbox" id="Especializados" name="channels" onchange="updateDashboard()">
+                <i class="far fa-square"></i> Especializados
+            </label>
+        </div>
+      </div>
+      </div>
+          
           
           <div class="form-group">
             <label for="kamSelector">Seleccionar KAM:</label>

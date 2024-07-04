@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const token = getTokenFromUrl() || sessionStorage.getItem("authToken");
     if (!token) {
-        redirectToLogin();
+        // redirectToLogin();
     } else {
         sessionStorage.setItem("authToken", token);
         const userDetails = parseJwt(token);
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             sessionStorage.setItem("userName", userDetails.name);
             validateTokenAndProceed(token);
         } else {
-            redirectToLogin();
+            // redirectToLogin();
         }
     }
   
@@ -78,9 +78,9 @@ function setKAMSelectorOption() {
     }
   }
   
-  function redirectToLogin() {
-    window.location.href = 'https://login-teal-three.vercel.app/';
-  }
+  // function redirectToLogin() {
+  //   window.location.href = 'https://login-teal-three.vercel.app/';
+  // }
   
   function validateTokenAndProceed(token) {
     return fetch('https://artistic-verdant-flock.glitch.me/validate-token', {

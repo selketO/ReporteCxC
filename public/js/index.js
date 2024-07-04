@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     channelCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateDashboard);
+        checkbox.addEventListener('change', updateCharts());
     });
 
     document.getElementById('kamSelector').addEventListener('change', updateDashboard);
