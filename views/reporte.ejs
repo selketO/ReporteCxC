@@ -93,15 +93,18 @@
       </div>
           
           
-          <div class="form-group">
-            <label for="kamSelector">Seleccionar KAM:</label>
-            <select id="kamSelector" class="form-control" onchange="updateReport()">
-              <option value="">Todos los KAMs</option>
-              <% uniqueKams.forEach(kam => { %>
-                <option value="<%= kam %>"><%= kam %></option>
-              <% }); %>
-            </select>
-          </div>
+      <div id="kams" class="form-group">
+        <label for="kamSelector">Seleccionar KAM:</label>
+        <select id="kamSelector" class="form-control" onchange="updateReport()">
+          <option value="">Todos los KAMs</option>
+          <% uniqueKams.forEach(kam=> {
+            if (!['Mayra Acevedo', 'Pedro Alberto Mora Cabrera', 'Zaira García'].includes(kam)) { %>
+            <option value="<%= kam %>">
+              <%= kam %>
+            </option>
+            <% }}); %>
+        </select>
+      </div>
           <div class="form-group">
             <label for="clientSelector">Seleccionar Cliente:</label>
             <select id="clientSelector" class="form-control" onchange="updateReport()">
